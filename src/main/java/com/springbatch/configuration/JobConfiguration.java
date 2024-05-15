@@ -60,19 +60,17 @@ public ItemWriter<Product> itemWriter(DataSource dataSource) {
              .build();
 }	 
 	 
-	 @Bean
 	 public ItemProcessor<Product, Product> itemProcessor() {
-		 
-		 return new CustomItemProcessor();
+	 return new CustomItemProcessor();
 		
 	}
 	
 	 
 	 @Bean
-      public Job jobBean(JobRepository jobRepository,Step step) {
+      public Job jobBean(JobRepository jobRepository,JobCompleteNotify listener,Step step) {
       return new JobBuilder("job", jobRepository)
     			  .start(step)
-    			  
+    			  .listener(listener)
     			  .build();
 		
 	}
