@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-
 import com.springbatch.model.Product;
 
 @Configuration
@@ -25,17 +24,18 @@ public class JobConfiguration {
 	
 
 @Bean
-	public Step step(JobRepository jobRepogistry,
+public Step step(JobRepository jobRepogistry,
 			DataSourceTransactionManager transactionManager,
 			ItemReader<Product> reader,
-			ItemWriter<Product> writer ,ItemProcessor<Product, Product> processor)
+			ItemWriter<Product> writer,
+			ItemProcessor<Product, Product> processor)
 	{
 		   return new StepBuilder("jobStep",jobRepogistry)
 				.<Product,Product>chunk(5, transactionManager)
 				.reader(reader)
 				.writer(writer)
                 .allowStartIfComplete(true) 
-                 .processor(processor)
+                .processor(processor)
 				.build();
 	}
 	
@@ -72,8 +72,8 @@ public ItemWriter<Product> itemWriter(DataSource dataSource) {
     			  .start(step)
     			  .listener(listener)
     			  .build();
-		
-	}
+      
+	 }
 	
 	
 

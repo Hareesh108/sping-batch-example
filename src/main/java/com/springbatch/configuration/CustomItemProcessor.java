@@ -8,27 +8,21 @@ import com.springbatch.model.Product;
 @Component
 public class CustomItemProcessor implements ItemProcessor<Product, Product> {
 
-	
-	
-	
-	
-	
 	@Override
 	public Product process(Product item) throws Exception {
-		
+
 		try {
-			int price = Integer.parseInt(item.getPrice()); 
+			int price = Integer.parseInt(item.getPrice());
 			price *= 2;
-	        item.setPrice(String.valueOf(price));
+			item.setPrice(String.valueOf(price));
 		} catch (Exception e) {
-	         System.out.println(e);
+			System.out.println(e);
 		}
 		return item;
-		
-	}
-	
-}
 
+	}
+
+}
 
 //try {
 ////  put the percentage logic
